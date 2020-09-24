@@ -8,7 +8,8 @@ public class BackBallController : MonoBehaviour
     public Button backButton;
     private PlayerController player;
     public Transform ground;
-    // Start is called before the first frame update
+    public AudioClip click;
+
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -27,6 +28,7 @@ public class BackBallController : MonoBehaviour
 
     public void OnClick()
     {
+        SoundManager.instance.PlaySound(click, 1);
         for (int i = 0; i < player.balls.Count; i++)
         {
             player.balls[i].GetComponent<Collider2D>().enabled = false;

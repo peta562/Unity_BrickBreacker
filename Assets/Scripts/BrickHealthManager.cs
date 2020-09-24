@@ -12,15 +12,14 @@ public class BrickHealthManager : MonoBehaviour
     private Text brickHealthText;
     private GameManager gameManager;
     private SpriteGlowEffect glow;
-    private SoundManager sound;
     private PlayerController player;
+    public AudioClip ballHit;
     // Start is called before the first frame update
     void Start()
     {
         brickHealthText = GetComponentInChildren<Text>();
         gameManager = FindObjectOfType<GameManager>();
         glow = GetComponent<SpriteGlowEffect>();
-        sound = FindObjectOfType<SoundManager>();
         player = FindObjectOfType<PlayerController>();
         glow.enabled = false;
         brickHealthText.transform.rotation = Quaternion.Euler(0,0,0);
@@ -58,11 +57,7 @@ public class BrickHealthManager : MonoBehaviour
         if(other.gameObject.CompareTag("BallPrefab"))
         {
             StartCoroutine(StartGlow());
-            
-            if (!sound.ballHit.isPlaying)
-            {
-                sound.ballHit.Play();
-            }
+            SoundManager.instance.PlaySound(ballHit, 0.6f);
             TakeDamage(1);
         }
     }

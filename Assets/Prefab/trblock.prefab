@@ -277,6 +277,7 @@ MonoBehaviour:
   brickDeathParticle: {fileID: 1837023923396999081, guid: baa9bf087093ef0419ef456602a50cbb,
     type: 3}
   brickHealth: 0
+  ballHit: {fileID: 8300000, guid: d796912b373a22f4e865591fe31ddbbf, type: 3}
 --- !u!50 &50831580248877644
 Rigidbody2D:
   serializedVersion: 4

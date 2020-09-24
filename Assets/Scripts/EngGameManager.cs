@@ -7,6 +7,7 @@ public class EngGameManager : MonoBehaviour
 {
     private PlayerController player;
     public GameObject endGamePanel;
+    public AudioClip click;
     
     // Start is called before the first frame update
     void Start()
@@ -27,12 +28,12 @@ public class EngGameManager : MonoBehaviour
 
     public void Retry()
     {
-
+        SoundManager.instance.PlaySound(click, 0.8f);
         SceneManager.LoadScene("Game");
     }
     public void Quit()
     {
-
+        SoundManager.instance.PlaySound(click, 0.8f);
         SceneManager.LoadScene("Menu");
     }
 
