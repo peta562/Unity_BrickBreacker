@@ -5,11 +5,13 @@ using UnityEngine;
 public class GroundScript : MonoBehaviour
 {
     private PlayerController player;
+    private GameManager gameManager;
     private int numberOfEndShot;
     void Start()
     {  
         player = FindObjectOfType<PlayerController>();
-        numberOfEndShot = player.BallsAmount;
+        gameManager = FindObjectOfType<GameManager>();
+        numberOfEndShot = gameManager.BallsAmount;
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -21,7 +23,7 @@ public class GroundScript : MonoBehaviour
             if(numberOfEndShot == 0)
             {
                 player.endShot = true;
-                numberOfEndShot = player.BallsAmount;
+                numberOfEndShot = gameManager.BallsAmount;
             }
         }
         if(col.gameObject.CompareTag("Coin") || col.gameObject.CompareTag("Extra ball"))

@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class EngGameManager : MonoBehaviour
 {
     private PlayerController player;
+    private GameManager gameManager;
     public GameObject endGamePanel;
     public AudioClip click;
     
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerController>();
         endGamePanel.SetActive(false);
     }
@@ -23,6 +25,9 @@ public class EngGameManager : MonoBehaviour
         {
             player.endGame = true;
             endGamePanel.SetActive(true);
+            gameManager.level = 1;
+            gameManager.BallsAmount = 1;
+            SaveSystem.SavePlayer(gameManager);
         }
     }
 

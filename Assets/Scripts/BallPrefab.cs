@@ -5,10 +5,12 @@ using UnityEngine;
 public class BallPrefab : MonoBehaviour
 {
     private PlayerController player;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player = FindObjectOfType<PlayerController>();
+        gameManager = FindObjectOfType<GameManager>();
         Physics2D.IgnoreLayerCollision(8, 8);
     }
     void OnDestroy()
@@ -19,12 +21,12 @@ public class BallPrefab : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            player.coins++;
+            gameManager.coins++;
             other.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Extra ball"))
         {
-            player.BallsAmount++;
+            gameManager.BallsAmount++;
             other.gameObject.SetActive(false);
         }
     }

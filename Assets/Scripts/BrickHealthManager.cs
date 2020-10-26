@@ -14,7 +14,7 @@ public class BrickHealthManager : MonoBehaviour
     private SpriteGlowEffect glow;
     private PlayerController player;
     public AudioClip ballHit;
-    // Start is called before the first frame update
+    
     void Start()
     {
         brickHealthText = GetComponentInChildren<Text>();
@@ -33,14 +33,17 @@ public class BrickHealthManager : MonoBehaviour
         brickHealthText.transform.rotation = Quaternion.Euler(0,0,0);
         brickHealth = gameManager.level;
     }
-    // Update is called once per frame
     void Update()
     {
         brickHealthText.text = "" + brickHealth;
         if(brickHealth <= 0)
         {
-            player.score += gameManager.level;
-            player.scoreNumber.text = player.score.ToString();
+            gameManager.score += gameManager.level;
+            player.scoreNumber.text = gameManager.score.ToString();
+            if (gameManager.score > gameManager.highScore)
+            {
+                gameManager.highScore = gameManager.score;
+            }
             this.gameObject.SetActive(false);
             Instantiate(brickDeathParticle, transform.position, Quaternion.identity);
             glow.enabled = false;

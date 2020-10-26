@@ -10,9 +10,6 @@ public class PlayerController : MonoBehaviour
 
     public bool ballMoving;
     public bool endGame;
-    public int BallsAmount = 1;
-    public int coins = 0;
-    public int score = 0;
     public float duration = 0.5f;
     public bool endShot;
     public float speed = 14f;
@@ -22,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform wrapper;
     public Vector3 ballLandingPos;
     public GameObject backBallButton;
+    
 
     private const float maxPull = 160f;
 
@@ -37,14 +35,15 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         BallsAmountText = GetComponentInChildren<Text>();
-        BallsAmountText.text = "x" + BallsAmount;
+        BallsAmountText.text = "x" + gameManager.BallsAmount;
         ballLandingPos = new Vector3(0, transform.position.y, transform.position.z);
         wrapper.parent.gameObject.SetActive(false);
-        gameManager = FindObjectOfType<GameManager>();
         InputInstance = FindObjectOfType<InputManagerScript>();
         playerSprite = GetComponent<SpriteRenderer>();
         endShot = false;
+        coinsNumber.text = gameManager.coin.ToString();
     }
 
     
@@ -87,18 +86,18 @@ public class PlayerController : MonoBehaviour
                 }
                 BallsAmountText.gameObject.SetActive(true);
                 BallsAmountText.gameObject.transform.position = new Vector3(ballLandingPos.x, transform.position.y - 0.5f, transform.position.z);
-                BallsAmountText.text = "x" + BallsAmount;
+                BallsAmountText.text = "x" + gameManager.BallsAmount; 
                 balls.Clear();
                 gameManager.PlaceBricks();
                 endShot = false;
             }
-            coinsNumber.text = "" + coins;
+            coinsNumber.text = gameManager.coins.ToString();
         }
     }
 
     IEnumerator waitToReleaseBall()
     {
-        for(int i = 1; i <= BallsAmount; i++)
+        for(int i = 1; i <= gameManager.BallsAmount; i++)
         {
             Rigidbody2D ballInstance = Instantiate(_ballPrefab, transform.position, Quaternion.identity);
             balls.Add(ballInstance);
@@ -133,5 +132,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     
+
 }

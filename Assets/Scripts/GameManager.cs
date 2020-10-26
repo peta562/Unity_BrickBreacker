@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,27 +10,45 @@ public class GameManager : MonoBehaviour
     public GameObject triangleBrick;
     public GameObject extraBall;
     public GameObject coin;
+    public int coins = 0;
+    public int score = 0;
+    public int highScore = 0;
+    public int BallsAmount = 1;
     public int level;
     public List<GameObject> objectsInScene;
 
     private ObjectPool objectPool;
-    private int maxExtraBallNum;
-    // Start is called before the first frame update
+    private int maxExtraBallNum = 1;
+
+    void Awake()
+    {
+        try
+        {
+            PlayerData data = SaveSystem.LoadPlayer();
+            coins = data.coins;
+            level = data.level;
+            highScore = data.highscore;
+            BallsAmount = data.ballsAmount;
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+    }
     void Start()
     {
-        maxExtraBallNum = 1;
         objectPool = FindObjectOfType<ObjectPool>();
-        level = 1;
         for(int i = 0; i < spawnPoints.Length; i++)
         {
-            int brickToCreate = Random.Range(0, 4);
+            int brickToCreate = UnityEngine.Random.Range(0, 4);
             if(brickToCreate == 0)
             {
                 objectsInScene.Add(Instantiate(squareBrick, spawnPoints[i].position, Quaternion.identity));
             }
             else if (brickToCreate == 1)
             {
-                int triangleBrickToCreate = Random.Range(0, 5);
+                int triangleBrickToCreate = UnityEngine.Random.Range(0, 5);
                 switch(triangleBrickToCreate)
                 {
                     case 1:
@@ -68,7 +87,7 @@ public class GameManager : MonoBehaviour
         maxExtraBallNum = 1;
         foreach(Transform position in spawnPoints)
         {
-            int brickToCreate = Random.Range(0, 4);
+            int brickToCreate = UnityEngine.Random.Range(0, 4);
             if(brickToCreate == 0)
             {
                 GameObject brick = objectPool.GetPooledObject("Square Brick");
@@ -84,7 +103,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject brick = objectPool.GetPooledObject("Triangle Brick");
                 objectsInScene.Add(brick);
-                int triangleBrickToCreate = Random.Range(0, 5);
+                int triangleBrickToCreate = UnityEngine.Random.Range(0, 5);
                 switch(triangleBrickToCreate)
                 {
                     case 1:
@@ -135,5 +154,9 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+    void OnApplicationQuit()
+    {
+        SaveSystem.SavePlayer(this);
     }
 }
