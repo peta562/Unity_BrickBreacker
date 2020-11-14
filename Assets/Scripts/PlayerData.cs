@@ -9,12 +9,16 @@ public class PlayerData
     public int level;
     public int highscore;
     public int ballsAmount;
+    public int score;
+    public string spriteName;
 
-    public PlayerData(GameManager gameData)
+    public PlayerData(GameData gameData)
     {
         level = gameData.level;
         coins = gameData.coins;
         highscore = gameData.highScore;
-        ballsAmount = gameData.BallsAmount;
+        score = gameData.score;
+        ballsAmount = gameData.ballsAmount;
+        spriteName = gameData.playerSprite.name;
     }
 }

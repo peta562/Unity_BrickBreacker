@@ -27,7 +27,9 @@ public class EngGameManager : MonoBehaviour
             endGamePanel.SetActive(true);
             gameManager.level = 1;
             gameManager.BallsAmount = 1;
-            SaveSystem.SavePlayer(gameManager);
+            gameManager.score = 0;
+            gameManager.gameData.SetData(gameManager);
+            SaveSystem.SavePlayer(gameManager.gameData);
         }
     }
 

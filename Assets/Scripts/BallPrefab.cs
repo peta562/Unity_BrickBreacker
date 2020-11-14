@@ -6,13 +6,17 @@ public class BallPrefab : MonoBehaviour
 {
     private PlayerController player;
     private GameManager gameManager;
-    // Start is called before the first frame update
+    private SpriteRenderer spriteRenderer;
+    
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = FindObjectOfType<GameManager>();
+        spriteRenderer.sprite = gameManager.playerSprite;
         Physics2D.IgnoreLayerCollision(8, 8);
     }
+    
     void OnDestroy()
     {
         player.ballLandingPos = transform.position;

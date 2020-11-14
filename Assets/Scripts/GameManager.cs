@@ -15,29 +15,27 @@ public class GameManager : MonoBehaviour
     public int highScore = 0;
     public int BallsAmount = 1;
     public int level;
+    public Sprite playerSprite;
     public List<GameObject> objectsInScene;
 
     private ObjectPool objectPool;
     private int maxExtraBallNum = 1;
+    public GameData gameData;
 
     void Awake()
     {
-        try
-        {
-            PlayerData data = SaveSystem.LoadPlayer();
-            coins = data.coins;
-            level = data.level;
-            highScore = data.highscore;
-            BallsAmount = data.ballsAmount;
-
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
+        gameData = FindObjectOfType<GameData>();
+        level = gameData.level;
+        BallsAmount = gameData.ballsAmount;
+        score = gameData.score;
+        coins = gameData.coins;
+        highScore = gameData.highScore;
+        
+        playerSprite = Resources.Load<Sprite>("Balls/" + gameData.playerSprite.name);
     }
     void Start()
     {
+        
         objectPool = FindObjectOfType<ObjectPool>();
         for(int i = 0; i < spawnPoints.Length; i++)
         {
@@ -155,8 +153,11 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
     void OnApplicationQuit()
     {
-        SaveSystem.SavePlayer(this);
+        gameData.SetData(this);
+        SaveSystem.SavePlayer(gameData);
     }
+    
 }

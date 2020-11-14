@@ -42,8 +42,10 @@ public class PlayerController : MonoBehaviour
         wrapper.parent.gameObject.SetActive(false);
         InputInstance = FindObjectOfType<InputManagerScript>();
         playerSprite = GetComponent<SpriteRenderer>();
+        playerSprite.sprite = gameManager.playerSprite;
         endShot = false;
         coinsNumber.text = gameManager.coin.ToString();
+        scoreNumber.text = gameManager.score.ToString();
     }
 
     

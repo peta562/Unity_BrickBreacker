@@ -1244,10 +1244,10 @@ RectTransform:
   m_Father: {fileID: 1674635782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.785, y: 0.91813844}
-  m_AnchorMax: {x: 0.83820677, y: 0.94656616}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: -1, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -63.99997, y: -40.5}
+  m_SizeDelta: {x: 17, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458545272
 MonoBehaviour:
@@ -3214,7 +3214,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 796f1d734e51c4948a350c7c84348f60, type: 3}
-  m_Color: {r: 0.38431373, g: 0.92941177, b: 0.9411765, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3265,7 +3265,6 @@ MonoBehaviour:
   wrapper: {fileID: 2022529474}
   ballLandingPos: {x: 0, y: 0, z: 0}
   backBallButton: {fileID: 602673349}
-  BallsAmount: 1
   ballDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1336521417
 GameObject:
@@ -3485,8 +3484,10 @@ MonoBehaviour:
   coins: 0
   score: 0
   highScore: 0
+  currentScore: 0
   BallsAmount: 1
   level: 1
+  playerSprite: {fileID: 0}
   objectsInScene: []
 --- !u!1 &1392804357
 GameObject:

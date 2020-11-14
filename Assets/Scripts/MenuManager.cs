@@ -9,26 +9,30 @@ public class MenuManager : MonoBehaviour
 {
     public AudioClip click;
     public Text coinsText;
+    public GameObject shopPanel;
+    public GameData gameData;
 
     void Awake()
     {
-        try
-        {
-            PlayerData data = SaveSystem.LoadPlayer();
-            coinsText.text = data.coins.ToString();
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
+        gameData = FindObjectOfType<GameData>();
+        coinsText.text = gameData.coins.ToString();
     }
     public void StartGame()
     {
+        SaveSystem.SavePlayer(gameData);
         SceneManager.LoadScene("Game");
         SoundManager.instance.PlaySound(click, 0.7f);
     }
     public void Quit()
     {
         Application.Quit();
+    }
+    public void OpenShop()
+    {
+        shopPanel.SetActive(true);
+    }
+    public void CloseShop()
+    {
+        shopPanel.SetActive(false);
     }
 }
