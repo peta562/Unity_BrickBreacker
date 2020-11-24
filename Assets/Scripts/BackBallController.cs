@@ -29,11 +29,13 @@ public class BackBallController : MonoBehaviour
     public void OnClick()
     {
         SoundManager.instance.PlaySound(click, 1);
+        StopCoroutine(player.releaseBalls);
         for (int i = 0; i < player.balls.Count; i++)
         {
             player.balls[i].GetComponent<Collider2D>().enabled = false;
             player.balls[i].velocity = ground.position * player.speed;
         }
+        player.endShot = true;
     }
 
 }

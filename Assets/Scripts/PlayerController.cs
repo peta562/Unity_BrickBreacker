@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform wrapper;
     public Vector3 ballLandingPos;
     public GameObject backBallButton;
+    internal Coroutine releaseBalls;
     
 
     private const float maxPull = 160f;
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
             if(ballRelease)
             {
                 InputInstance.swipeDelta = Vector2.zero;
-                StartCoroutine(waitToReleaseBall());
+                releaseBalls = StartCoroutine(waitToReleaseBall());
                 backBallButton.SetActive(true);
                 ballRelease = false;
             }

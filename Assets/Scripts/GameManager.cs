@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private int maxExtraBallNum = 1;
     public GameData gameData;
 
+    
     void Awake()
     {
         gameData = FindObjectOfType<GameData>();
